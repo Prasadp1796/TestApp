@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../Partials/head.ejs %>
+</head>
+<body>
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <% include ../Partials/navbar.ejs %>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <% include ../Partials/sidebar.ejs %>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <input type="hidden" id="queNos" value="<%- Test.NoOfQuestions %>">
+                <input type="hidden" id="testId" value="<%- Test._id %>">
+                <div class="row">
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-header bg-gradient-danger">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="text-white"><%- Test.TestName %></h4>
+                                    </div>
+                                    <div class="col">
+                                        <button id="addEmployee"
+                                                class="btn btn-primary float-right"><%- Test.NoOfQuestions %>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div id="queDetails" class="col-12">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer">
+                                <div class="row  mx-auto">
+                                    <div class="col-12">
+                                        <nav aria-label="Page navigation example">
+                                            <ul id="paginator" class="pagination">
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <% include ../Partials/footer.ejs %>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+
+<!-- plugins:js -->
+<% include ../Partials/bodyScriptLoader.ejs %>
+
+<script>
+    <% include ./script.js %>
+</script>
+
+<!-- End custom js for this page-->
+
+
+</body>
+</html>

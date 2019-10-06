@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../Partials/head.ejs %>
+</head>
+<body>
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <% include ../Partials/navbar.ejs %>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <% include ../Partials/sidebar.ejs %>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-header bg-gradient-danger">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="text-white">Manage Employees</h4>
+                                    </div>
+                                    <div class="col">
+                                        <button id="addEmployee" class="btn btn-primary float-right"><i
+                                                    class="fa fa-plus"></i> Add Employee
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-stripped text-nowrap text-center">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Email ID</th>
+                                            <th>Contact</th>
+                                            <th>Password</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="empTableBody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <% include ../Partials/footer.ejs %>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+
+<!-- plugins:js -->
+<% include add.ejs %>
+<% include edit.ejs %>
+<% include ../Partials/bodyScriptLoader.ejs %>
+
+<script>
+    <% include ./script.js %>
+</script>
+<!-- End custom js for this page-->
+
+
+</body>
+</html>
