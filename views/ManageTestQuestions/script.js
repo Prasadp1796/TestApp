@@ -4,14 +4,12 @@ var totalQuestions, testID;
 var questions = new Array();
 
 
-
-
 $(document).ready(function () {
     totalQuestions = $("#queNos").val();
     testID = $("#testId").val();
 
     //Add Empty Divs To Form
-    for(i=1; i<=totalQuestions; i++){
+    for (i = 1; i <= totalQuestions; i++) {
         //Add Question Numbers Buttons To Paginator
         $("#paginator").append(` <li class="page-item"><button class="page-link" onclick="selectQuestion(${i})">${i}</button></li>`);
 
@@ -34,12 +32,31 @@ $(document).ready(function () {
                 </div>
             </form>
         `);
+
+        if (totalQuestions == i) {
+            $("#queDetails").append(
+                `
+            <div class="form-group col-12">
+                <button class="btn btn-primary" id="saveTest" onclick="saveTestFun(event)">Save Test</button>
+            </div>
+        `
+            )
+        }
     }
 
     //Show First Question And Hide All Other Questions
     $(".question").hide();
     $("#question1").show();
+
+
 });
+
+
+//Method Called When Save Test Button is Pressed
+var saveTestFun = function (e) {
+    e.preventDefault(e);
+    console.log(questions)
+};
 
 //Method To Select Question
 var selectQuestion = function (queNo) {
@@ -58,7 +75,7 @@ var onQuestionSelected = function (queNo) {
                 <textarea class="form-control" name="QuestionText" id="QuestionText" placeholder="Enter Question"></textarea>
             </div>`;
 
-    if(queType == 1){
+    if (queType == 1) {
         str = `
             ${questionIp}
             <div class="form-group col-12">
@@ -109,7 +126,7 @@ var onQuestionSelected = function (queNo) {
                 </div>
             </div>
         `
-    }else if(queType == 2){
+    } else if (queType == 2) {
         str = `
              ${questionIp}
              <div class="form-group col-12">
@@ -117,7 +134,7 @@ var onQuestionSelected = function (queNo) {
                 <input type="text" class="form-control" id="answer${queNo}" name="answer${queNo}" placeholder="Enter Answer Here">
             </div>
         `
-    }else if(queType == 3){
+    } else if (queType == 3) {
         str = `
             ${questionIp}
             <div class="form-group col-12">
@@ -148,7 +165,8 @@ var onQuestionSelected = function (queNo) {
         `
     }
 
-    console.log(str);
+
+    // console.log(str);
     $(`#QueType${queNo}`).prop('disabled', 'disabled');
     $(`#queDetails${queNo}`).empty();
     $(`#question${queNo}`).append(`
@@ -170,17 +188,50 @@ var resetQuestion = function (queNo) {
 
 //Method To Save Question
 var saveQuestion = function (queNo, e) {
-    console.log(e)
+    // console.log(e)
     e.preventDefault(e);
+    var queType = $(`#QueType${queNo}`).val();
     var tmpData = $(`#question${queNo}`).serializeArray();
-  console.log(questions[queNo-1]);
-    questions[queNo - 1] = {};
+    console.log(queType, tmpData);
 
-    for(i=0; i<tmpData.length;i++){
-        questions[queNo - 1][tmpData[i].name] = tmpData[i].value;
+    if (queType == 1) {
+        questions[queNo - 1] = {
+            QuestionNo: queNo,
+            QuestionText: tmpData[0].value,
+            OptionA: tmpData[2].value,
+            OptionB: tmpData[3].value,
+            OptionC: tmpData[4].value,
+            OptionD: tmpData[5].value,
+            Answer: tmpData[1].value,
+            TestID: testID
+        }
     }
-
-    questions[queNo - 1].TestID = testID;
+    else if (queType == 2) {
+        questions[queNo - 1] = {
+            QuestionNo: queNo,
+            QuestionText: tmpData[0].value,
+            Answer: tmpData[1].value,
+            TestID: testID
+        }
+    }
+    else if (queType == 3) {
+        questions[queNo - 1] = {
+            QuestionNo: queNo,
+            QuestionText: tmpData[0].value,
+            OptionA: "True",
+            OptionB: "False",
+            Answer: tmpData[1].value,
+            TestID: testID
+        }
+    }
     console.log(questions[queNo - 1])
+    // questions[queNo - 1] = {};
+
+    // for(i=0; i<tmpData.length;i++){
+    //     questions[queNo - 1][tmpData[i].name] = tmpData[i].value;
+    // }
+    //
+    // questions[queNo - 1].TestID = testID;
+    // console.log(questions[queNo - 1])
     // return false;
 };
